@@ -1,19 +1,163 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Start Crop Recommendation App</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-  </head>
-  <body style="background:#BCBBB8">
-    <div class="container my-5">
-      <h1 class="text-center text-success">Welcome to the Crop Recommendation System</h1>
-      <div class="text-center mt-5">
-        <a href="/index" class="btn btn-lg btn-primary">Start App</a>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crop Recommendation App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    @keyframes wave-animation {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0); }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .background-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: white;
+      margin-top: 100px; /* Adjusted margin-top to push content down */
+    }
+
+    .box-container {
+      display: flex;
+      flex-direction: column; /* Stack boxes vertically */
+      align-items: center; /* Center boxes horizontally */
+      gap: 20px; /* Space between boxes */
+    }
+
+    .box {
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      padding: 50px; /* Increased height of the boxes */
+      width: 80%; /* Increased width of the boxes */
+      max-width: 600px; /* Set a maximum width for larger screens */
+      margin: 10px;
+      text-align: center;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      color: #333;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .box h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1.75rem; /* Increased font size of box headings */
+      margin-bottom: 20px;
+    }
+
+    .box p {
+      font-size: 1.1rem; /* Increased font size of box text */
+      color: #666; /* Set a softer color for the box text */
+    }
+
+    .box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-custom {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #fff;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 600;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-disease {
+      background-color: #e63946;
+    }
+
+    .btn-predict {
+      background-color: #007bff;
+    }
+
+    .btn-disease:hover {
+      background-color: #d62839;
+    }
+
+    .btn-predict:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <video class="background-video" autoplay muted loop>
+    <source src="https://assets.mixkit.co/videos/5759/5759-720.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="container">
+    <!-- SVG with glassy effect and blurred background -->
+    <svg width="100%" height="150px">
+      <defs>
+        <!-- Gradient definition for text -->
+        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#ff6600;stop-opacity:1" />
+          <stop offset="25%" style="stop-color:#ffcc00;stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#33ccff;stop-opacity:1" />
+          <stop offset="75%" style="stop-color:#66ff66;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#ff0099;stop-opacity:1" />
+        </linearGradient>
+
+        <!-- Filter for background blur -->
+        <filter id="blurFilter">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="8" />
+        </filter>
+
+        <!-- Glassy effect for background -->
+        <linearGradient id="glassEffect" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:rgba(255,255,255,0.1);stop-opacity:1" />
+          <stop offset="100%" style="stop-color:rgba(255,255,255,0.4);stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <!-- Glassy background rectangle with blur -->
+      <rect x="0" y="0" width="100%" height="100" fill="url(#glassEffect)" filter="url(#blurFilter)" />
+      <!-- Text with gradient fill -->
+      <text x="20" y="85" font-family="'Montserrat', sans-serif" font-size="40" font-weight="bold" fill="url(#gradient1)">
+        Welcome to the Crop Recommendation System
+      </text>
+    </svg>
+    <div class="box-container">
+      <div class="box">
+        <h2>Crop Disease Detection</h2>
+        <p>Identify and address crop diseases efficiently with our advanced tools.</p>
+        <a href="/start-streamlit" class="btn-custom btn-disease">Detect Disease</a>
+      </div>
+      <div class="box">
+        <h2>Crop Prediction</h2>
+        <p>Predict the best crops to grow based on your data and insights.</p>
+        <a href="/index" class="btn-custom btn-predict">Predict Crop</a>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
+  </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
