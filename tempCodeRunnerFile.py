@@ -1,2 +1,1 @@
-
-@app.route('/')
+crop_disease
